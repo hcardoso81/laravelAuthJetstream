@@ -9,6 +9,10 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Profile;
+use App\Models\Post;
+use App\Models\Video;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -58,4 +62,22 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    //Relacion 1:1
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    //Relacion 1:N
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    //Relacion 1:N
+    public function videos(): HasMany
+    {
+        return $this->hasMany(Video::class);
+    }
 }
