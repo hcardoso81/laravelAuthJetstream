@@ -12,6 +12,8 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Models\Profile;
 use App\Models\Post;
 use App\Models\Video;
+use App\Models\Role;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
@@ -79,5 +81,11 @@ class User extends Authenticatable
     public function videos(): HasMany
     {
         return $this->hasMany(Video::class);
+    }
+
+    //Relacion N:N
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
     }
 }
