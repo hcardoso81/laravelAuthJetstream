@@ -13,6 +13,7 @@ use App\Models\Profile;
 use App\Models\Post;
 use App\Models\Video;
 use App\Models\Role;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -85,6 +86,13 @@ class User extends Authenticatable
     public function videos(): HasMany
     {
         return $this->hasMany(Video::class);
+    }
+
+    //Relacion 1:N
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 
     //Relacion N:N

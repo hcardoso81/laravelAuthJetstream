@@ -5,23 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use App\Models\User;
-use App\Models\Comment;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-class Video extends Model
+class Comment extends Model
 {
     use HasFactory;
+
+    //Relacion 1:N (inversa)
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    //Relacion 1:N polimorfica
+    //Relacion Polimorfica
 
-    public function comments(): MorphMany
+    public function commentable(): MorphTo
     {
-        return $this->morphMany(Comment::class, 'commentable');
+        return $this->morphTo();
     }
 }

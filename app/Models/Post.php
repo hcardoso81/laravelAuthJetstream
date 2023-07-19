@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Image;
+use App\Models\Comment;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Post extends Model
@@ -34,5 +36,12 @@ class Post extends Model
     {
         //seundo parametro, el el nombre del metodo en el modelo Image
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    //Relacion 1:N polimorfica
+
+    public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }
