@@ -7,3 +7,7 @@
 -   php artisan migrate
 -   npm install
 -   php artisan make:component Alert2
+
+##Examples Relatiosn Polimorhipcs
+
+-   tinker: $user->image()->create(["url"=>"url1"]); or Image::Create(['url'=>'url1', 'imageable_id'=>1, 'imageable_type'=>User::class]);

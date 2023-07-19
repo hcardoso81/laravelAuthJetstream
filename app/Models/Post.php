@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Image;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Post extends Model
 {
@@ -24,5 +26,13 @@ class Post extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    //Relacion 1:1 Polimorfica
+
+    public function image(): MorphOne
+    {
+        //seundo parametro, el el nombre del metodo en el modelo Image
+        return $this->morphOne(Image::class, 'imageable');
     }
 }

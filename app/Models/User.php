@@ -15,6 +15,7 @@ use App\Models\Video;
 use App\Models\Role;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class User extends Authenticatable
 {
@@ -66,26 +67,38 @@ class User extends Authenticatable
     ];
 
     //Relacion 1:1
+
     public function profile()
     {
         return $this->hasOne(Profile::class);
     }
 
     //Relacion 1:N
+
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
 
     //Relacion 1:N
+
     public function videos(): HasMany
     {
         return $this->hasMany(Video::class);
     }
 
     //Relacion N:N
+
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    //Relacion 1:1 Polimorfica
+
+    public function image(): MorphOne
+    {
+        //seundo parametro, el el nombre del metodo en el modelo Image
+        return $this->morphOne(Image::class, 'imageable');
     }
 }
