@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\User;
 use App\Models\Comment;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Video extends Model
 {
@@ -23,5 +25,12 @@ class Video extends Model
     public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    //Relacion N:N poliformica
+
+    public function posts(): MorphToMany
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 }

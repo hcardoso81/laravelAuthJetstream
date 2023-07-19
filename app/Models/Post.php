@@ -9,8 +9,10 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Comment;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Post extends Model
 {
@@ -34,7 +36,7 @@ class Post extends Model
 
     public function image(): MorphOne
     {
-        //seundo parametro, el el nombre del metodo en el modelo Image
+        //segundo parametro, el el nombre del metodo en el modelo Image
         return $this->morphOne(Image::class, 'imageable');
     }
 
@@ -43,5 +45,12 @@ class Post extends Model
     public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    //Relacion N:N poliformica
+
+    public function posts(): MorphToMany
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 }
